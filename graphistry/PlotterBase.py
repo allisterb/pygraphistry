@@ -1966,6 +1966,7 @@ class PlotterBase(Plottable):
             db = None,
             user = 'tigergraph',
             pwd = 'tigergraph',
+            api_token = None,
             verbose = False):
         """Register Tigergraph connection setting defaults
     
@@ -1983,6 +1984,8 @@ class PlotterBase(Plottable):
         :type user: Optional[str]    
         :param pwd: 
         :type pwd: Optional[str]
+        :param api_token: 
+        :type api_token: Optional[str]
         :param verbose: Whether to print operations
         :type verbose: Optional[bool]         
         :returns: Plotter
@@ -1997,7 +2000,7 @@ class PlotterBase(Plottable):
 
         """
         res = copy.copy(self)
-        res._tigergraph = Tigeristry(self, protocol, server, web_port, api_port, db, user, pwd, verbose)
+        res._tigergraph = Tigeristry(self, protocol, server, web_port, api_port, db, user, pwd, api_token, verbose)
         return res
 
 

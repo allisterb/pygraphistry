@@ -1,3 +1,5 @@
+from logging import info, debug, error
+
 import requests
 import pandas as pd
 
@@ -47,6 +49,7 @@ class Tigeristry(object):
         db = None,
         user = 'tigergraph',
         pwd = 'tigergraph',
+        api_token = None,
         verbose = False
     ):
 
@@ -58,11 +61,13 @@ class Tigeristry(object):
             'db': db,
             'user': user,
             'pwd': pwd,
+            'api_token': api_token,
             'verbose': verbose
         }
 
         self.__log('TG config: ' + str({k: v for k, v in self.tiger_config.items() if k not in ['pwd']}))
-             
+        if api_token is None:
+            info('No authorization token specified for REST++ requests.')
 
     # --------------------------------------------------    
 
@@ -97,7 +102,9 @@ class Tigeristry(object):
         if dry_run:            
             return url
 
-        resp = requests.get(url)
+        api_token = self.tiger_config['api_token']
+        resp = requests.get(url, headers={'Content-Type':'application/json',
+               'Authorization': 'Bearer {}'.format(api_token)}) if api_token is not None else requests.get(url)
         self.__log(resp)
         json = resp.json()
 

@@ -1251,6 +1251,7 @@ class PyGraphistry(object):
         db = None,
         user = 'tigergraph',
         pwd = 'tigergraph',
+        api_token = None,
         verbose = False
     ):
         """Register Tigergraph connection setting defaults
@@ -1269,6 +1270,8 @@ class PyGraphistry(object):
         :type user: Optional[str]    
         :param pwd: 
         :type pwd: Optional[str]
+        :param api_token: 
+        :type api_token: Optional[str]
         :param verbose: Whether to print operations
         :type verbose: Optional[bool]         
         :returns: Plotter
@@ -1283,7 +1286,7 @@ class PyGraphistry(object):
 
         """
 
-        return Plotter().tigergraph(protocol, server, web_port, api_port, db, user, pwd, verbose)
+        return Plotter().tigergraph(protocol, server, web_port, api_port, db, user, pwd, api_token, verbose)
 
 
     @staticmethod
