@@ -1857,6 +1857,7 @@ class PlotterBase(Plottable):
     def _make_arrow_dataset(self, edges: pa.Table, nodes: pa.Table, name: str, description: str, metadata) -> ArrowUploader:
 
         from .pygraphistry import PyGraphistry
+        from ._version import get_versions
 
         au : ArrowUploader = ArrowUploader(
             server_base_path=PyGraphistry.protocol() + '://' + PyGraphistry.server(),
@@ -1867,7 +1868,7 @@ class PlotterBase(Plottable):
                 'key': PyGraphistry.api_key(),
                 'agent': 'pygraphistry',
                 'apiversion' : '3',
-                'agentversion': sys.modules['graphistry'].__version__,  # type: ignore
+                'agentversion': get_versions()['version'],  # type: ignore
                 **(metadata or {})
             },
             certificate_validation=PyGraphistry.certificate_validation())

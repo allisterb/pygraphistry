@@ -123,6 +123,7 @@ class Tigeristry(object):
         edges_df = pd.DataFrame({'from_id': [], 'to_id': []})
         edge_key = bindings['edges']
         edges = [x for x in json if edge_key in x]      
+        g = None
         if len(edges) > 0 and (edge_key in edges[0]):
             edges = edges[0][edge_key]
             edges_df = pd.DataFrame(edges)
@@ -159,7 +160,7 @@ class Tigeristry(object):
                             lambda row: row['type_x'] if not pd.isna(row['type_x']) else row['type_y'],
                             axis=1)}),
                 left_index=True, right_index=True)              
-        g = graphistry.bind(node='node_id').nodes(nodes_df)
+        g = g.bind(node='node_id').nodes(nodes_df)
         return g
 
 
@@ -169,7 +170,7 @@ class Tigeristry(object):
         self.__log(url)
         if dry_run:
             return url
-        response = requests.post(url, data=query, headers={})
+        response = requests.post(url, data=query)
         json = response.json()
         return self.__verify_and_unwrap_json_result(json)
 

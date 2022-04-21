@@ -104,12 +104,13 @@ class ArrowUploader:
 
     @property
     def metadata(self):
+        from ._version import get_versions
         return {
             #'usertag': PyGraphistry._tag,
             #'key': PyGraphistry.api_key()
             'agent': 'pygraphistry',
             'apiversion' : '3',
-            'agentversion': sys.modules['graphistry'].__version__,
+            'agentversion': get_versions()['version'],
             **(self.__metadata if not (self.__metadata is None) else {})
         }
     
