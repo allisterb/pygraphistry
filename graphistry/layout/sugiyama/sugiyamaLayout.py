@@ -4,9 +4,9 @@
 import pandas as pd, typing
 from sys import getrecursionlimit, setrecursionlimit
 
-from graphistry.layout.graph import Vertex, GraphBase, Graph, Edge
-from graphistry.layout.utils import DummyVertex, LayoutVertex, Rectangle, size_median
-from graphistry.layout.utils.layer import Layer
+from ..graph import Vertex, GraphBase, Graph, Edge
+from ..utils import DummyVertex, LayoutVertex, Rectangle, size_median
+from ..utils.layer import Layer
 
 
 class SugiyamaLayout(object):

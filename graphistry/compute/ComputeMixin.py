@@ -3,7 +3,7 @@ import logging
 
 import pandas as pd
 
-from graphistry.Plottable import Plottable
+from ..Plottable import Plottable
 from .chain import chain as chain_base
 from .hop import hop as hop_base
 from .filter_by_dict import (

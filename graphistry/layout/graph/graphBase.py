@@ -1,6 +1,6 @@
 # DEPRECRATED: Non-vector operators over non-vectorized data
 
-from graphistry.layout.utils import Poset
+from ..utils import Poset
 
 
 class GraphBase(object):

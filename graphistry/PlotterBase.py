@@ -1,4 +1,4 @@
-from graphistry.Plottable import Plottable
+from .Plottable import Plottable
 from typing import Any, Callable, List, Optional, Union, TYPE_CHECKING
 import copy, hashlib, logging, numpy as np, pandas as pd, pyarrow as pa, sys, uuid
 from functools import lru_cache

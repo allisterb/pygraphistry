@@ -1,7 +1,7 @@
 from typing import Optional, TYPE_CHECKING
 import pandas as pd
 
-from graphistry.Plottable import Plottable
+from ..Plottable import Plottable
 
 
 def filter_by_dict(df, filter_dict: Optional[dict] = None) -> pd.DataFrame:

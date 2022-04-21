@@ -1,6 +1,6 @@
 import logging
 from typing import List, Optional
-from graphistry.hyper_dask import hypergraph as hypergraph_new
+from .hyper_dask import hypergraph as hypergraph_new
 logger = logging.getLogger(__name__)
 
 

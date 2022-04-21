@@ -3,7 +3,7 @@
 
 from typing import List
 from .graphBase import GraphBase
-from graphistry.layout.utils import Poset
+from ..utils import Poset
 import pandas as np
 
 

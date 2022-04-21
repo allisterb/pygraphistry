@@ -1,4 +1,6 @@
+from lib2to3.pgen2 import token
 from logging import info, debug, error
+from telnetlib import AUTHENTICATION
 
 import requests
 import pandas as pd
@@ -68,7 +70,9 @@ class Tigeristry(object):
         self.__log('TG config: ' + str({k: v for k, v in self.tiger_config.items() if k not in ['pwd']}))
         if api_token is None:
             info('No authorization token specified for REST++ requests.')
-
+        else:
+            info(f'REST++ api token is {api_token[0:3]}xxx')
+        self.api_token = api_token
     # --------------------------------------------------    
 
 
@@ -102,9 +106,13 @@ class Tigeristry(object):
         if dry_run:            
             return url
 
-        api_token = self.tiger_config['api_token']
-        resp = requests.get(url, headers={'Content-Type':'application/json',
-               'Authorization': 'Bearer {}'.format(api_token)}) if api_token is not None else requests.get(url)
+        #api_token = self.tiger_config['api_token']
+        self.__log(url)
+        if self.api_token is None:
+            info('No authorization token specified for REST++ requests.')
+        else:
+            info(f'REST++ api token is {self.api_token[0:3]}xxx')
+        resp = requests.get(url, headers={'Authorization': f'Bearer 7uagjks8beup5t1kq5clo4seihmlvefr'}, allow_redirects=False)# if self.api_token is not None else requests.get(url)
         self.__log(resp)
         json = resp.json()
 
@@ -151,7 +159,7 @@ class Tigeristry(object):
                             lambda row: row['type_x'] if not pd.isna(row['type_x']) else row['type_y'],
                             axis=1)}),
                 left_index=True, right_index=True)              
-        g = g.bind(node='node_id').nodes(nodes_df)
+        g = graphistry.bind(node='node_id').nodes(nodes_df)
         return g
 
 
@@ -161,7 +169,7 @@ class Tigeristry(object):
         self.__log(url)
         if dry_run:
             return url
-        response = requests.post(url, data=query)
+        response = requests.post(url, data=query, headers={'Authorization': 'Bearer 7uagjks8beup5t1kq5clo4seihmlvefr'})
         json = response.json()
         return self.__verify_and_unwrap_json_result(json)
 

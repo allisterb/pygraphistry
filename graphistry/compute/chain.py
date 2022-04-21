@@ -1,7 +1,7 @@
 from typing import cast, List, Optional, Tuple, Union
 import pandas as pd
 
-from graphistry.Plottable import Plottable
+from ..Plottable import Plottable
 from .ast import ASTObject, ASTNode, ASTEdge
 from .filter_by_dict import filter_by_dict
 

@@ -1,7 +1,7 @@
 from typing import List, Optional
 import pandas as pd
 
-from graphistry.Plottable import Plottable
+from ..Plottable import Plottable
 from .filter_by_dict import filter_by_dict
 
 

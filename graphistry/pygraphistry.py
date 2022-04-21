@@ -1,4 +1,4 @@
-from graphistry.Plottable import Plottable
+from .Plottable import Plottable
 from typing import Any, Callable, Iterable, List, Optional, Union
 
 """Top-level import of class PyGraphistry as "Graphistry". Used to connect to the Graphistry server and then create a base plotter."""

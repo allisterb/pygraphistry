@@ -1,7 +1,7 @@
 from typing import Any, Optional
 import pandas as pd
 
-from graphistry.Plottable import Plottable
+from ..Plottable import Plottable
 
 import logging
 logger = logging.getLogger(__name__)

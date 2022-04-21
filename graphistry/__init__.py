@@ -1,4 +1,4 @@
-from graphistry.pygraphistry import (  # noqa: E402, F401
+from .pygraphistry import (  # noqa: E402, F401
     client_protocol_hostname, protocol, server,
     register, privacy, login, refresh, api_token, verify_token,
     store_token_creds_in_memory,
@@ -17,7 +17,7 @@ from graphistry.pygraphistry import (  # noqa: E402, F401
     ArrowFileUploader,
     PyGraphistry)
 
-from graphistry.compute import ast
+from .compute import ast
 
 from ._version import get_versions
 __version__ = get_versions()['version']
