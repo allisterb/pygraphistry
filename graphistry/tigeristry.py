@@ -112,7 +112,7 @@ class Tigeristry(object):
             info('No authorization token specified for REST++ requests.')
         else:
             info(f'REST++ api token is {self.api_token[0:3]}xxx')
-        resp = requests.get(url, headers={'Authorization': f'Bearer 7uagjks8beup5t1kq5clo4seihmlvefr'}, allow_redirects=False)# if self.api_token is not None else requests.get(url)
+        resp = requests.get(url, headers={'Authorization': self.api_token}, allow_redirects=False)# if self.api_token is not None else requests.get(url)
         self.__log(resp)
         json = resp.json()
 
@@ -169,7 +169,7 @@ class Tigeristry(object):
         self.__log(url)
         if dry_run:
             return url
-        response = requests.post(url, data=query, headers={'Authorization': 'Bearer 7uagjks8beup5t1kq5clo4seihmlvefr'})
+        response = requests.post(url, data=query, headers={})
         json = response.json()
         return self.__verify_and_unwrap_json_result(json)
 
