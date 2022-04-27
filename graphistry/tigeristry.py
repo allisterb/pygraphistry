@@ -1,6 +1,4 @@
-from lib2to3.pgen2 import token
 from logging import info, debug, error
-from telnetlib import AUTHENTICATION
 
 import requests
 import pandas as pd
@@ -106,7 +104,7 @@ class Tigeristry(object):
             return url
 
         #api_token = self.tiger_config['api_token']
-        self.__log(url)
+        
         if self.api_token is None:
             info('No authorization token specified for REST++ requests.')
         else:
