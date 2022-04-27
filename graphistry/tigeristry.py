@@ -21,8 +21,7 @@ class Tigeristry(object):
     # ----------------- Helpers ----------------------- 
 
     def __log(self, v):
-        if self.tiger_config['verbose']:
-            print(v)
+        debug(v)
             
     # () -> 'http://site.com:9000'          
     def __base_url(self, mode = 'api'):
@@ -120,9 +119,11 @@ class Tigeristry(object):
 
 
     def __json_to_graphistry(self, graphistry, json, bindings):        
+        node_key = bindings['nodes']
         edges_df = pd.DataFrame({'from_id': [], 'to_id': []})
         edge_key = bindings['edges']
-        edges = [x for x in json if edge_key in x]      
+        edges = [x for x in json[0][node_key][0]['attributes'] if edge_key == x]
+        info(f'Edges: {edges}.')      
         g = None
         if len(edges) > 0 and (edge_key in edges[0]):
             edges = edges[0][edge_key]
@@ -136,14 +137,14 @@ class Tigeristry(object):
             g = graphistry.bind(source='from_id', destination='to_id').edges(edges_df)
         
         nodes_df = pd.DataFrame({'type': [], 'node_id': []})
-        node_key = bindings['nodes']
+       
         nodes = [x for x in json if node_key in x]
         if len(nodes) > 0 and (node_key in nodes[0]):
             nodes = nodes[0][node_key]
             nodes_df = pd.DataFrame(nodes)
             try:
                 nodes_df = nodes_df.drop(columns=['attributes'])
-                attrs = [x['attributes'] for x in nodes]
+                attrs = [x['attributes'] for x in nodes if x['attributes'] != edge_key]
                 nodes_df = pd.merge( nodes_df, pd.DataFrame(attrs), left_index=True, right_index=True )
             except:
                 self.__log('Failed to extract node attrs')
@@ -167,7 +168,6 @@ class Tigeristry(object):
     def __gsql(self, query, dry_run = False):
         base_url = self.__base_url('web')
         url = base_url + '/gsqlserver/interpreted_query'
-        self.__log(url)
         if dry_run:
             return url
         response = requests.post(url, data=query)
